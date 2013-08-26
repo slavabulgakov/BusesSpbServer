@@ -22,13 +22,14 @@ params = urllib.urlencode({
                 'bSortable_6' : 'true',
                 'bSortable_7' : 'true',
                 'bSortable_8' : 'true',
-                'bSortable_9' : 'true',
-                'bSortable_10' : 'true',
-                'transport-type' : '1',
-                'transport-type' : '46',
-                'transport-type' : '2',
-                'transport-type' : '0'
+                'bSortable_9' : 'false',
+                'bSortable_10' : 'false',
+                # 'transport-type' : '1',
+                # 'transport-type' : '46',
+                # 'transport-type' : '2',
+                # 'transport-type' : '0',
                 })
+params = params + '&transport-type=0&transport-type=2&transport-type=1'
 url = urllib2.urlopen('http://transport.orgp.spb.ru/Portal/transport/routes/list', params)
 text = url.read()
 if DEBUG:
