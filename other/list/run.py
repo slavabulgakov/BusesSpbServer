@@ -1,9 +1,8 @@
 import urllib
 import urllib2
 
-DEBUG = True
-
-params = urllib.urlencode({
+def load():
+        params = urllib.urlencode({
                 'sEcho' : '10',
                 'iColumns' : '11',
                 'sColumns' : 'id,transportType,routeNumber,name,urban,poiStart,poiFinish,cost,forDisabled,scheduleLinkColumn,mapLinkColumn',
@@ -29,28 +28,7 @@ params = urllib.urlencode({
                 # 'transport-type' : '2',
                 # 'transport-type' : '0',
                 })
-params = params + '&transport-type=0&transport-type=2&transport-type=1'
-url = urllib2.urlopen('http://transport.orgp.spb.ru/Portal/transport/routes/list', params)
-text = url.read()
-if DEBUG:
-        path = 'data'
-else:
-        path = '/home/f/futbixru/data'
-data = ''
-try:
-        f = open(path, 'r')
-except Exception, e:
-        pass
-else:
-        data = f.read()
-        f.close()
-version = 0
-oldText = ''
-if '=>' in data:
-        divider = data.find('=>')
-        version = int(data[0 : divider])
-        oldText = data[divider + 2 : ]
-if text != oldText:
-        f = open(path, 'w')
-        f.write(str(version + 1) + '=>' + text)
-        f.close()
+        params = params + '&transport-type=0&transport-type=2&transport-type=1'
+        url = urllib2.urlopen('http://transport.orgp.spb.ru/Portal/transport/routes/list', params)
+        text = url.read()
+        return text
