@@ -4,7 +4,7 @@ path = ''
 if DEBUG:
         path = ''
 else:
-        path = '/home/f/futbixru/list/'
+        path = '/home/f/futbixru/busesspb/public_html/busesspb/other'
 
 def openFile(filename):
         data = ''

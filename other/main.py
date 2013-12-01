@@ -1,16 +1,27 @@
 from filesIO import *
 from os import listdir
-from os.path import isfile
+from os.path import isdir, exists
+from StringIO import StringIO
+import zipfile
 
 for item in listdir('.'):
-	if not isfile(item):
+	if isdir(item):
 		run = __import__(item + '.run', fromlist=['load'])
-		text = run.load()
-		oldText = openFile(item + '/data')
-		version = 0
-		if text != oldText:
-			saveFile(item + '/data', text)
-			v = openFile('version')
-			if len(v) > 0:
-				version = int(v)
-		saveFile(item + '/version', str(version + 1))
+		data = run.load()
+		oldData = openFile(item + '/data')
+		version = 1
+		v = openFile('version')
+		if len(v) > 0:
+			version = int(v)
+		if data != oldData:
+			version = version + 1
+			saveFile(item + '/data', data)
+			zippath = item + '/extract'
+			if exists(zippath):
+				zipData = StringIO()
+				zipData.write(data)
+				z = zipfile.ZipFile(zipData)
+				z.extractall(zippath)
+		else:
+			print('same')
+		saveFile(item + '/version', str(version))

@@ -18,6 +18,4 @@ urlpatterns = patterns('',
     # url(r'^admin/', include(admin.site.urls)),
     (r'^echo/', views.echo),
     (r'^version/', views.version),
-    (r'^auth/', views.auth),
-    (r'^', views.root),
 )
