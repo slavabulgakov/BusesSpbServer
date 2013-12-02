@@ -18,5 +18,6 @@ urlpatterns = patterns('',
 	url(r'^admin-media/(.*)$', 'django.views.static.serve', {'document_root': settings.ADMIN_MEDIA_ROOT}),
     url(r'^media/(.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     
-    (r'^', include('list.urls')),
+    (r'^v1_0/', include('v1_0.urls')),
+    (r'^', include('v1_0.urls')), #old
 )

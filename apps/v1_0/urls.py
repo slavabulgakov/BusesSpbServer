@@ -19,4 +19,8 @@ urlpatterns = patterns('',
     (r'^routesdata/', views.routesdata),
     (r'^listdata/', views.listdata),
     (r'version/$', views.version),
+
+    #old
+    (r'^version/$', views.version_old),
+    (r'^echo/$', views.listdata),
 )

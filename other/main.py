@@ -8,14 +8,14 @@ for item in listdir('.'):
 	if isdir(item):
 		run = __import__(item + '.run', fromlist=['load'])
 		data = run.load()
-		oldData = openFile(item + '/data')
+		oldData = openFile(item + '/data.dat')
 		version = 0
-		v = openFile('version')
+		v = openFile('version.dat')
 		if len(v) > 0:
 			version = int(v)
 		if data != oldData:
 			version = version + 1
-			saveFile(item + '/data', data)
+			saveFile(item + '/data.dat', data)
 			zippath = item + '/extract'
 			if exists(zippath):
 				zipData = StringIO()
@@ -23,5 +23,5 @@ for item in listdir('.'):
 				z = zipfile.ZipFile(zipData)
 				z.extractall(zippath)
 		else:
-			print('same')
-		saveFile(item + '/version', str(version))
+			print('same file')
+		saveFile(item + '/version.dat', str(version))

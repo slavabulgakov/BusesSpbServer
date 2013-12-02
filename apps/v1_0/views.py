@@ -16,7 +16,7 @@ def _getData(folder, filename):
 
 def listdata(request):
 	try:
-		data = _getData('list', 'data')
+		data = _getData('list', 'data.dat')
 	except Exception, e:
 		data = ''
 	return HttpResponse(data, content_type="text/plain")
@@ -30,7 +30,14 @@ def routesdata(request):
 
 def version(request):
 	try:
-		data = _getData(request.path.split('/')[1], 'version')
+		data = _getData(request.path.split('/')[1], 'version.dat')
+	except Exception, e:
+		data = '1'
+	return HttpResponse(data, content_type="text/plain")
+
+def version_old(request):
+	try:
+		data = _getData('list', 'version.dat')
 	except Exception, e:
 		data = '1'
 	return HttpResponse(data, content_type="text/plain")
