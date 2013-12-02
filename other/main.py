@@ -9,7 +9,7 @@ for item in listdir('.'):
 		run = __import__(item + '.run', fromlist=['load'])
 		data = run.load()
 		oldData = openFile(item + '/data')
-		version = 1
+		version = 0
 		v = openFile('version')
 		if len(v) > 0:
 			version = int(v)

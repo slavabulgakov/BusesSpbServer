@@ -5,23 +5,32 @@ import urllib2
 import urllib
 import settings
 
-def _getData():
+def _getData(folder, filename):
 	if settings.DEBUG:
-		path = 'other/data'
+		path = 'other/'
 	else:
-		path = '/home/f/futbixru/busesspb/public_html/busesspb/other/data'
-	f = open(path, 'r')
+		path = '/home/f/futbixru/busesspb/public_html/busesspb/other/'
+	f = open(path + folder + '/' + filename, 'r')
 	text = f.read()
 	return text
 
-def echo(request):
-	data = _getData()
-	divider = data.find('=>')
-	text = data[divider + 2 : ]
-	return HttpResponse(text, content_type="text/plain")
+def listdata(request):
+	try:
+		data = _getData('list', 'data')
+	except Exception, e:
+		data = ''
+	return HttpResponse(data, content_type="text/plain")
+
+def routesdata(request):
+	try:
+		data = _getData('feed/extract', 'routes.txt')
+	except Exception, e:
+		data = ''
+	return HttpResponse(data, content_type="text/plain")
 
 def version(request):
-	data = _getData()
-	divider = data.find('=>')
-	version = data[0 : divider]
-	return HttpResponse(version, content_type="text/plain")
+	try:
+		data = _getData(request.path.split('/')[1], 'version')
+	except Exception, e:
+		data = '1'
+	return HttpResponse(data, content_type="text/plain")
