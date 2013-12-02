@@ -10,7 +10,7 @@ for item in listdir('.'):
 		data = run.load()
 		oldData = openFile(item + '/data.dat')
 		version = 0
-		v = openFile('version.dat')
+		v = openFile(item + '/version.dat')
 		if len(v) > 0:
 			version = int(v)
 		if data != oldData:
@@ -22,6 +22,4 @@ for item in listdir('.'):
 				zipData.write(data)
 				z = zipfile.ZipFile(zipData)
 				z.extractall(zippath)
-		else:
-			print('same file')
 		saveFile(item + '/version.dat', str(version))
