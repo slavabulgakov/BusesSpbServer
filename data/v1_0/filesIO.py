@@ -1,10 +1,10 @@
-DEBUG = True
+DEBUG = False
 
 path = ''
 if DEBUG:
         path = ''
 else:
-        path = '/home/f/futbixru/busesspb/public_html/busesspb/data/'
+        path = '/home/f/futbixru/busesspb/public_html/busesspb/data/v1_0/'
 
 def openFile(filename):
         data = ''
