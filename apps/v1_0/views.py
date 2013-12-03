@@ -1,43 +1,32 @@
 from django.http import HttpResponse
-from django.utils import simplejson
-import json
-import urllib2
-import urllib
 import settings
 
 def _getData(folder, filename):
 	if settings.DEBUG:
-		path = 'other/'
+		path = 'data/v1_0/'
 	else:
-		path = '/home/f/futbixru/busesspb/public_html/busesspb/other/'
+		path = '/home/f/futbixru/busesspb/public_html/busesspb/data/v1_0/'
 	f = open(path + folder + '/' + filename, 'r')
 	text = f.read()
 	return text
 
 def listdata(request):
-	try:
-		data = _getData('list', 'data.dat')
-	except Exception, e:
-		data = ''
+	data = _getData('list', 'data.dat')
 	return HttpResponse(data, content_type="text/plain")
 
 def routesdata(request):
-	try:
-		data = _getData('feed/extract', 'routes.txt')
-	except Exception, e:
-		data = ''
+	data = _getData('feed/extract', 'routes.txt')
 	return HttpResponse(data, content_type="text/plain")
 
 def version(request):
-	try:
-		data = _getData(request.path.split('/')[1], 'version.dat')
-	except Exception, e:
-		data = '1'
-	return HttpResponse(data, content_type="text/plain")
-
-def version_old(request):
-	try:
-		data = _getData('list', 'version.dat')
-	except Exception, e:
-		data = '1'
+	bits = request.path.split('/')
+	data = ''
+	if settings.DEBUG:
+		index = 2
+		count = 5
+	else:
+		index = 3
+		count = 6
+	if len(bits) == count:
+		data = _getData(request.path.split('/')[index], 'version.dat')
 	return HttpResponse(data, content_type="text/plain")
