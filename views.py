@@ -8,6 +8,7 @@ def _getData(folder, filename):
 		path = '/home/f/futbixru/busesspb/public_html/busesspb/data/v1_0/'
 	f = open(path + folder + '/' + filename, 'r')
 	text = f.read()
+	f.close()
 	return text
 
 def echo(request):

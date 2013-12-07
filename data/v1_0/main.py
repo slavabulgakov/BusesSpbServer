@@ -11,7 +11,8 @@ else:
         path = '/home/f/futbixru/busesspb/public_html/busesspb/data/v1_0/'
 
 for item in listdir(path):
-	if isdir(item):
+	itempath = path + item
+	if isdir(itempath):
 		run = __import__(item + '.run', fromlist=['load'])
 		data = run.load()
 		oldData = filesIO.openFile(item + '/data.dat')
@@ -22,7 +23,7 @@ for item in listdir(path):
 		if data != oldData:
 			version = version + 1
 			filesIO.saveFile(item + '/data.dat', data)
-			zippath = item + '/extract'
+			zippath = itempath + '/extract'
 			if exists(zippath):
 				zipData = StringIO()
 				zipData.write(data)
