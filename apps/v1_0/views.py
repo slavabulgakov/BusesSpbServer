@@ -19,6 +19,10 @@ def routesdata(request):
 	data = _getData('feed/extract', 'routes.txt')
 	return HttpResponse(data, content_type="text/plain")
 
+def stationsdata(request):
+	data = _getData('feed/extract', 'stops.txt')
+	return HttpResponse(data, content_type="text/plain")
+
 def version(request):
 	bits = request.path.split('/')
 	data = ''
